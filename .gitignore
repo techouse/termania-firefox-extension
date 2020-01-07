@@ -4,4 +4,4 @@ package-lock.json
 .DS_Store
 .env
 .idea
-*.zip
+termania.zip

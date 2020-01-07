@@ -1,6 +1,6 @@
 {
   "name": "termania_firefox_extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Termania.net Lookup Firefox Extension",
   "scripts": {
@@ -17,6 +17,7 @@
     "date-fns": "^2.8.1",
     "dexie": "^2.0.4",
     "dexie-export-import": "^1.0.0-beta.14",
+    "jszip": "^3.2.2",
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.11"
   },
