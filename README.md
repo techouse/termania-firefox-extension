@@ -6,6 +6,12 @@ dictionary search engine [Termania.net](https://www.termania.net) with the click
 ## Why yet another Firefox Extension
 Actually this is a port of my original [Termania.net Lookup Google Chrome Extension](https://github.com/techouse/termania-chrome-extension).
 
+## How do I install it? :rocket:
+Simply visit Firefox Browser Add-ons and [download](https://addons.mozilla.org/en-US/firefox/addon/termania-net-lookup/) it.
+
+## Is there a Chrome version as well? :crystal_ball:
+Yes and it can be accessed [here](https://github.com/techouse/termania-chrome-extension).
+
 ## How does it work?
 The user first needs to select a Slovenian word and right-click it to open Firefox's context menu:
 
