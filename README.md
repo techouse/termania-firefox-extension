@@ -1,17 +1,10 @@
-# Termania.net Lookup Google Chrome Extension
+# Termania.net Lookup Firefox Extension
 
-This Google Chrome extension enables foreigners as well as Slovenian native speakers to search the extensive Slovenian
+This Firefox extension enables foreigners as well as Slovenian native speakers to search the extensive Slovenian
 dictionary search engine [Termania.net](https://www.termania.net) with the click of a single button.
 
-## Why yet another Google Chrome Extension
-I wanted to build something that actually solves a problem and helps people, especially foreigners
-who are trying to learn the Slovenian language.
-
-## Why Chrome and not Firefox?
-**2 reasons:**
-1. Because according to the [latest statistics](https://gs.statcounter.com/browser-market-share) Google
-Chrome has a whooping **64.3%** market share and Firefox has only **4.49%**.
-2. I only have so much free time on my hands :hourglass_flowing_sand:
+## Why yet another Firefox Extension
+Actually this is a Firefox port of my original [Termania.net Lookup Google Chrome Extension](https://github.com/techouse/termania-chrome-extension).
 
 ## How does it work?
 The user first needs to select a Slovenian word and right-click it to open Chrome's context menu:
@@ -44,7 +37,7 @@ npm run build
 ```
 
 The finished extension will present itself in a directory called `build`. From there you can
-[load it as an unpacked extension](https://stackoverflow.com/questions/24577024/install-chrome-extension-not-in-the-store).
+[load it as a temporary extension](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/).
 
 
 [1]: https://en.wikipedia.org/wiki/Lemma_(morphology)
