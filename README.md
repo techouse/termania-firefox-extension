@@ -4,10 +4,10 @@ This Firefox extension enables foreigners as well as Slovenian native speakers t
 dictionary search engine [Termania.net](https://www.termania.net) with the click of a single button.
 
 ## Why yet another Firefox Extension
-Actually this is a Firefox port of my original [Termania.net Lookup Google Chrome Extension](https://github.com/techouse/termania-chrome-extension).
+Actually this is a port of my original [Termania.net Lookup Google Chrome Extension](https://github.com/techouse/termania-chrome-extension).
 
 ## How does it work?
-The user first needs to select a Slovenian word and right-click it to open Chrome's context menu:
+The user first needs to select a Slovenian word and right-click it to open Firefox's context menu:
 
 ![Context menu](screenshots/context.png)
 
