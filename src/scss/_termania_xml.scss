@@ -1,0 +1,27 @@
+.color_orange {
+  color: #fb6f28;
+}
+
+.font_xlarge {
+  @apply text-xl;
+}
+
+.strong {
+  @apply font-bold;
+}
+
+.color_lightdark {
+  @apply text-gray-700;
+}
+
+.font_small {
+  @apply text-sm;
+}
+
+.font_large {
+  @apply text-lg;
+}
+
+.color_dark {
+  @apply text-black;
+}
