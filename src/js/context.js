@@ -37,24 +37,33 @@ export const contextClicked = (clickData) => {
 
                             browser.storage.local.set({ result }, () => {
                                 browser.runtime.sendMessage({
-                                    msg: "search_complete",
-                                    data: {
-                                        result,
-                                        query,
-                                    },
-                                })
+                                           msg: "search_complete",
+                                           data: {
+                                               result,
+                                               query,
+                                           },
+                                       })
+                                       .catch((e) => {
+                                           console.log("Caught en exception ...")
+                                           console.log(e)
+                                       })
                             })
                         })
                         .catch(() => {
                             console.log(`[ERROR] NO SEARCH RESULTS FOR "${query}"`)
 
                             browser.runtime.sendMessage({
-                                msg: "error404",
-                                data: {
-                                    error: "Search query yielded no results!",
-                                    query,
-                                },
-                            })
+                                       msg: "error404",
+                                       data: {
+                                           error: "Search query yielded no results!",
+                                           query,
+                                       },
+                                   })
+                                   .catch((e) => {
+                                       console.log("Caught en exception ...")
+                                       console.log(e)
+                                   })
+
                             browser.storage.local.set({
                                 error404: true,
                                 query,
@@ -65,12 +74,17 @@ export const contextClicked = (clickData) => {
                     console.log(`[ERROR] NO LEMMA FOUND FOR "${query}"`)
 
                     browser.runtime.sendMessage({
-                        msg: "error404",
-                        data: {
-                            error: "Lemma not found!",
-                            query,
-                        },
-                    })
+                               msg: "error404",
+                               data: {
+                                   error: "Lemma not found!",
+                                   query,
+                               },
+                           })
+                           .catch((e) => {
+                               console.log("Caught en exception ...")
+                               console.log(e)
+                           })
+
                     browser.storage.local.set({
                         error404: true,
                         query,

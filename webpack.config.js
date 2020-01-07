@@ -47,7 +47,7 @@ const config = {
     stats: {
         colors: true
     },
-    devtool: sourceMap ? "cheap-module-eval-source-map" : undefined,
+    devtool: sourceMap ? "cheap-module-source-map" : undefined,
     module: {
         rules: [
             {
@@ -110,6 +110,14 @@ const config = {
                     name: "[name].[ext]",
                     outputPath: "images/",
                     publicPath: "/images/",
+                }
+            },
+            {
+                test: /dexie.*\.js$/,
+                loader: 'string-replace-loader',
+                options: {
+                    search: 'return new Function("let F=async ()=>{},p=F();return [p,Object.getPrototypeOf(p),Promise.resolve(),F.constructor];")();',
+                    replace: 'return [Promise.resolve(), Promise.prototype, Promise.resolve(), Function.constructor]',
                 }
             }
         ]

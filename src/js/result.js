@@ -1,4 +1,4 @@
-import Vue     from "vue"
+import Vue    from "vue"
 import Result from "@/components/Result"
 
 const app = new Vue({
