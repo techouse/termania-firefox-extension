@@ -1,9 +1,14 @@
+<div align="center">
+    <img width="425" height="87" src="src/images/logo_large.png">
+</div>
+
 # Termania.net Lookup Firefox Extension
 
 ![Mozilla Add-on](https://img.shields.io/amo/v/termania-net-lookup)
 ![Mozilla Add-on](https://img.shields.io/amo/users/termania-net-lookup)
 [![GitHub license](https://img.shields.io/github/license/techouse/termania-firefox-extension)](https://github.com/techouse/termania-firefox-extension/blob/master/LICENSE)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/72f7d4de02be4536bc96c5bc5b06c9a6)](https://www.codacy.com/manual/techouse/termania-firefox-extension?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=techouse/termania-firefox-extension&amp;utm_campaign=Badge_Grade)
+![GitHub manifest.json dynamic](https://img.shields.io/github/manifest-json/permissions/techouse/termania-firefox-extension)
 
 This Firefox extension enables foreigners as well as Slovenian native speakers to search the extensive Slovenian
 dictionary search engine [Termania.net](https://www.termania.net) with the click of a single button.
