@@ -42,10 +42,6 @@
                 dictionaries: [],
                 optionKey: "id",
                 optionLabel: "name",
-                classes: {
-                    input: "form-input",
-                    wrapper: "form-select mt-1 block w-full",
-                },
             }
         },
 

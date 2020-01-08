@@ -212,6 +212,7 @@
   top: 0;
   bottom: 0;
   fill: #606f7b;
+  @apply h-12;
 }
 
 .icons svg {
@@ -242,7 +243,7 @@
   border-radius: 0.25em;
   line-height: 1.25;
   text-align: left;
-  @apply mb-4;
+  position: static !important;
 }
 
 .dropdown > li {
