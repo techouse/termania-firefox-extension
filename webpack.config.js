@@ -27,13 +27,17 @@ const config = {
         result: [
             "./src/js/result.js",
             "./src/scss/result.scss"
+        ],
+        dictionaries: [
+            "./src/js/dictionaries.js",
+            "./src/scss/dictionaries.scss"
         ]
     },
     output: {
         path: path.resolve(__dirname, "build"),
-        publicPath: "/build/",
-        filename: "[name].js",
-        chunkFilename: "[name].[chunkhash].js"
+        publicPath: "/",
+        filename: "js/[name].js",
+        chunkFilename: "js/[name].[chunkhash].js"
     },
     optimization: {},
     resolve: {
@@ -155,7 +159,8 @@ const config = {
             paths: glob.sync([
                 path.join(__dirname, 'src/html/*.html'),
                 path.join(__dirname, 'src/js/**/*.js'),
-                path.join(__dirname, 'src/js/**/*.vue')
+                path.join(__dirname, 'src/js/**/*.vue'),
+                path.join(__dirname, 'node_modules/vue-single-select/dist/VueSingleSelect.vue')
             ]),
             whitelist: ["color_orange", "font_xlarge", "strong", "color_lightdark", "font_small", "italic", "font_large", "color_dark"]
         }),

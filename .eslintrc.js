@@ -11,6 +11,7 @@ module.exports = {
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:vue/recommended",
+        "plugin:vue-i18n/recommended",
     ],
     globals: {
         "process": true,
@@ -44,7 +45,10 @@ module.exports = {
         "import/ignore": [
             "node_modules",
             "\\.(coffee|scss|css|less|hbs|svg|json)$",
-        ]
+        ],
+        "vue-i18n": {
+            localeDir: "./src/js/i18n/*.json"
+        }
     },
     rules: {
         "no-multi-spaces": 0,
@@ -87,6 +91,10 @@ module.exports = {
                 "_remove",
                 "_multiplier"
             ]
+        }],
+        "vue-i18n/no-dynamic-keys": "error",
+        "vue-i18n/no-unused-keys": ["error", {
+            extensions: [".js", ".vue"]
         }]
     },
     plugins: [

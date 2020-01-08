@@ -32,5 +32,8 @@ module.exports = {
         tableLayout: ["responsive", "hover", "focus"],
         textColor: ["responsive", "hover", "focus", "group-hover"],
         visibility: ["responsive", "hover", "focus", "group-hover"],
-    }
+    },
+    plugins: [
+        require('@tailwindcss/custom-forms'),
+    ]
 }

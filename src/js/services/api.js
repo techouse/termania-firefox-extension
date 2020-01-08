@@ -2,7 +2,7 @@ import axios          from "axios"
 import { licenceKey } from "@/services/constants"
 
 const api = axios.create({
-    baseURL: "https://api.termania.net/1.0/search/",
+    baseURL: "https://api.termania.net/1.0/",
     headers: {
         common: {
             Accept: "application/json",
