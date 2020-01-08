@@ -40,6 +40,11 @@ which in turn supplies all the information that is then presented to the user in
 
 ![Results](screenshots/result.png)
 
+You also have the option to change the default dictionary to any dictionary provided by [Termania.net][0]! All you have
+to do is open the popup menu in Chrome's Menu bar and make your choice!
+
+![Dictionaries](screenshots/select_dictionary.png)
+
 ## Why is the installation of the extension taking so long?
 Unfortunately the Sloleks database housing all those 100.000 lemmas is quite large (approx. 50MB)
 and importing it into IndexedDB takes about 5 minutes to complete during which time you wou't be
