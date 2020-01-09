@@ -8,6 +8,40 @@ export const contextMenuItem = {
     ],
 }
 
+const findDefinition = (query, dictionaryId) => {
+    import(/* webpackChunkName: "services" */ "@/services").then(({ search }) => {
+        search(query, dictionaryId)
+            .then((result) => {
+                console.log("[OK] SEARCH RESULT: ", result)
+
+                browser.storage.local.set({ result }, () => {
+                    browser.runtime.sendMessage({
+                        msg: "search_complete",
+                        data: {
+                            result,
+                            query,
+                        },
+                    })
+                })
+            })
+            .catch(() => {
+                console.log(`[ERROR] NO SEARCH RESULTS FOR "${query}"`)
+
+                browser.runtime.sendMessage({
+                    msg: "error404",
+                    data: {
+                        error: "Search query yielded no results!",
+                        query,
+                    },
+                })
+                browser.storage.local.set({
+                    error404: true,
+                    query,
+                })
+            })
+    })
+}
+
 export const contextClicked = (clickData) => {
     if (clickData.menuItemId === contextMenuItem.id
         && clickData.selectionText
@@ -27,61 +61,29 @@ export const contextClicked = (clickData) => {
                 height: 480,
             })
 
-            import(/* webpackChunkName: "services" */ "@/services").then(({ getLemma, search }) => {
-                getLemma(query)
-                    .then((lemma) => {
-                        console.log("[OK] LEMMA: ", lemma)
+            import(/* webpackChunkName: "dictionary" */ "@/models/Dictionary").then(({ default: Dictionary }) => {
+                Dictionary.getActive()
+                          .then(({ id, languages }) => {
+                              if (languages.includes("sl")) {
+                                  import(/* webpackChunkName: "services" */ "@/services").then(({ getLemma }) => {
+                                      getLemma(query)
+                                          .then((lemma) => {
+                                              console.log("[OK] LEMMA: ", lemma)
 
-                        import(/* webpackChunkName: "dictionary" */ "@/models/Dictionary").then(({ default: Dictionary }) => {
-                            Dictionary.getActive()
-                                      .then(({ id }) => {
-                                          search(lemma, id)
-                                              .then((result) => {
-                                                  console.log("[OK] SEARCH RESULT: ", result)
+                                              findDefinition(lemma, id)
+                                          })
+                                          .catch(() => {
+                                              console.log(`[WARNING] NO LEMMA FOUND FOR "${query}". NOW SEARCHING EXACTLY FOR "${query}".`)
 
-                                                  browser.storage.local.set({ result }, () => {
-                                                      browser.runtime.sendMessage({
-                                                          msg: "search_complete",
-                                                          data: {
-                                                              result,
-                                                              query,
-                                                          },
-                                                      })
-                                                  })
-                                              })
-                                              .catch(() => {
-                                                  console.log(`[ERROR] NO SEARCH RESULTS FOR "${query}"`)
+                                              findDefinition(query, id)
+                                          })
+                                  })
+                              } else {
+                                  console.log(`[INFO] ACTIVE DICTIONARY DOES NOT SUPPORT SLOVENIAN LANGUAGE. NOT USING A SEARCHING FOR LEMMA. NOW SEARCHING EXACTLY FOR "${query}".`)
 
-                                                  browser.runtime.sendMessage({
-                                                      msg: "error404",
-                                                      data: {
-                                                          error: "Search query yielded no results!",
-                                                          query,
-                                                      },
-                                                  })
-                                                  browser.storage.local.set({
-                                                      error404: true,
-                                                      query,
-                                                  })
-                                              })
-                                      })
-                        })
-                    })
-                    .catch(() => {
-                        console.log(`[ERROR] NO LEMMA FOUND FOR "${query}"`)
-
-                        browser.runtime.sendMessage({
-                            msg: "error404",
-                            data: {
-                                error: "Lemma not found!",
-                                query,
-                            },
-                        })
-                        browser.storage.local.set({
-                            error404: true,
-                            query,
-                        })
-                    })
+                                  findDefinition(query, id)
+                              }
+                          })
             })
         })
     }
