@@ -5,11 +5,12 @@
   "Active Dictionary": "Trenutno aktiven slovar",
   "Source": "Vir",
   "No matches found for query \"{query}\".": "Ni rezultatov za poizvedbo \"{query}\".",
-  "Searching ...": "Iščem ...",
+  "Looking for definition ...": "Iščem definicijo ...",
   "Installing Termania.net Lookup": "Nameščam Termania.net Lookup",
   "Importing SLOLEKS 2.0 database": "Uvažam SLOLEKS 2.0 podatkovno bazo",
   "Installing Termania.net Lookup complete!": "Termania.net Lookup uspešno nameščen!",
   "Importing SLOLEKS 2.0 database 100% complete. You may now use the extension!": "SLOLEKS 2.0 podatkovna baza 100% uvožena. Zdaj lahko uporabljate dodatek!",
   "Importing database {progress}% complete": "Uvažanje podatkovne baze {progress}% zaključeno",
-  "Type to search a dictionary ...": "Vtipkajte ime slovarja ..."
+  "Type to search a dictionary ...": "Vtipkajte ime slovarja ...",
+  "Look up on Termania.net": "Išči definicijo na Termania.net"
 }

@@ -19,7 +19,7 @@
             <div v-else class="flex flex-col justify-center items-center h-full">
                 <img src="/images/spinner.svg" alt="spinner" width="250">
                 <h1 class="text-xl font-bold text-gray-500 mt-4">
-                    {{ $t("Searching ...") }}
+                    {{ $t("Looking for definition ...") }}
                 </h1>
             </div>
         </div>

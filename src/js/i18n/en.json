@@ -5,11 +5,12 @@
   "Active Dictionary": "Active Dictionary",
   "Source": "Source",
   "No matches found for query \"{query}\".": "No matches found for query \"{query}\".",
-  "Searching ...": "Searching ...",
+  "Looking for definition ...": "Looking for definition ...",
   "Installing Termania.net Lookup": "Installing Termania.net Lookup",
   "Importing SLOLEKS 2.0 database": "Importing SLOLEKS 2.0 database",
   "Installing Termania.net Lookup complete!": "Installing Termania.net Lookup complete!",
   "Importing SLOLEKS 2.0 database 100% complete. You may now use the extension!": "Importing SLOLEKS 2.0 database 100% complete. You may now use the extension!",
   "Importing database {progress}% complete": "Importing database {progress}% complete",
-  "Type to search a dictionary ...": "Type to search a dictionary ..."
+  "Type to search a dictionary ...": "Type to search a dictionary ...",
+  "Look up on Termania.net": "Look up on Termania.net"
 }

@@ -1,6 +1,8 @@
+import i18n from "@/i18n"
+
 export const contextMenuItem = {
     id: "termania_menu",
-    title: "Search on Termania.net",
+    title: i18n.t("Look up on Termania.net"),
     contexts: [
         "selection",
     ],
