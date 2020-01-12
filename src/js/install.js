@@ -1,5 +1,24 @@
 import i18n from "@/i18n"
 
+export const isOutdated = () => new Promise((resolve, reject) => {
+    import(/* webpackChunkName: "db" */ "@/services/db").then(({ default: db }) => {
+        db.on("ready", () => {
+            db.words.where("msd")
+              .equalsIgnoreCase("Vp")
+              .first((word) => {
+                  if (!word) {
+                      return db.delete()
+                               .then(() => resolve(true))
+                  }
+                  return reject(Error("Databse is up to date!"))
+              })
+              .catch(() => db.delete()
+                             .then(() => resolve(true)))
+        })
+        db.open()
+    })
+})
+
 const install = () => {
     import(/* webpackChunkName: "db" */ "@/services/db").then(({ default: db }) => {
         /**

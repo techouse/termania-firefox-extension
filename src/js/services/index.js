@@ -101,10 +101,11 @@ export const search = (query, dictionaryId = DEFAULT_DICTIONARY_ID) => new Promi
     })
 })
 
-export const getLemma = (query) => new Promise((resolve, reject) => {
+export const getLemma = (query, withNames = false) => new Promise((resolve, reject) => {
     import(/* webpackChunkName: "db" */ "@/services/db").then(({ default: db }) => {
         db.words.where("word")
           .equalsIgnoreCase(query)
+          .and((word) => withNames ? true : !word.msd.startsWith("Sl"))
           .first((word) => {
               if (!word || !("lemma" in word)) {
                   return reject(Error(`Lemma of "${query}" not found!`))

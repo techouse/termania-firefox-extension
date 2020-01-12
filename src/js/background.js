@@ -16,8 +16,15 @@ browser.runtime.onInstalled.addListener(() => {
             })
     })
 
-    import(/* webpackChunkName: "install" */ "@/install").then(({ default: install }) => {
-        install()
+    import(/* webpackChunkName: "install" */ "@/install").then(({ isOutdated, default: install }) => {
+        isOutdated()
+            .then(() => {
+                console.log("Database is outdated or does not exist!")
+                install()
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
     })
 
     import(/* webpackChunkName: "context" */ "@/context").then(({ createContextMenu }) => {

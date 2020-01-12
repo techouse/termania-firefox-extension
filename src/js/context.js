@@ -68,14 +68,22 @@ export const contextClicked = (clickData) => {
                                   import(/* webpackChunkName: "services" */ "@/services").then(({ getLemma }) => {
                                       getLemma(query)
                                           .then((lemma) => {
-                                              console.log("[OK] LEMMA: ", lemma)
+                                              console.log("[OK] COMMON LEMMA: ", lemma)
 
                                               findDefinition(lemma, id)
                                           })
                                           .catch(() => {
-                                              console.log(`[WARNING] NO LEMMA FOUND FOR "${query}". NOW SEARCHING EXACTLY FOR "${query}".`)
+                                              getLemma(query, true)
+                                                  .then((lemmaProper) => {
+                                                      console.log("[OK] PROPER LEMMA: ", lemmaProper)
 
-                                              findDefinition(query, id)
+                                                      findDefinition(lemmaProper, id)
+                                                  })
+                                                  .catch(() => {
+                                                      console.log(`[WARNING] NO LEMMA FOUND FOR "${query}". NOW SEARCHING EXACTLY FOR "${query}".`)
+
+                                                      findDefinition(query, id)
+                                                  })
                                           })
                                   })
                               } else {
