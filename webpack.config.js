@@ -28,9 +28,9 @@ const config = {
             "./src/js/result.js",
             "./src/scss/result.scss"
         ],
-        dictionaries: [
-            "./src/js/dictionaries.js",
-            "./src/scss/dictionaries.scss"
+        options: [
+            "./src/js/options.js",
+            "./src/scss/options.scss"
         ]
     },
     output: {

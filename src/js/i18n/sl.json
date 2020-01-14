@@ -1,7 +1,7 @@
 {
   "Termania.net search results": "Termania.net rezultati iskanja",
   "Termania.net dictionary selection": "Termania.net izbor slovarja",
-  "Dictionary Settings": "Nastavitve slovarjev",
+  "Settings": "Nastavitve",
   "Active Dictionary": "Trenutno aktiven slovar",
   "Source": "Vir",
   "No matches found for query \"{query}\".": "Ni rezultatov za poizvedbo \"{query}\".",
@@ -12,5 +12,7 @@
   "Importing SLOLEKS 2.0 database 100% complete. You may now use the extension!": "SLOLEKS 2.0 podatkovna baza 100% uvožena. Zdaj lahko uporabljate dodatek!",
   "Importing database {progress}% complete": "Uvažanje podatkovne baze {progress}% zaključeno",
   "Type to search a dictionary ...": "Vtipkajte ime slovarja ...",
-  "Look up on Termania.net": "Išči definicijo na Termania.net"
+  "Look up on Termania.net": "Išči definicijo na Termania.net",
+  "Miscellaneous": "Drugo",
+  "Automatically close old result popup window on new query": "Nova poizvedba avtomatsko zapre okno prejšnjega rezultata"
 }

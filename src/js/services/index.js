@@ -105,7 +105,7 @@ export const getLemma = (query, withNames = false) => new Promise((resolve, reje
     import(/* webpackChunkName: "db" */ "@/services/db").then(({ default: db }) => {
         db.words.where("word")
           .equalsIgnoreCase(query)
-          .and((word) => withNames ? true : !word.msd.startsWith("Sl"))
+          .and((word) => (withNames ? true : !word.msd.startsWith("Sl")))
           .first((word) => {
               if (!word || !("lemma" in word)) {
                   return reject(Error(`Lemma of "${query}" not found!`))

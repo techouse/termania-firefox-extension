@@ -42,6 +42,59 @@ const findDefinition = (query, dictionaryId) => {
     })
 }
 
+const createWindow = () => {
+    import(/* webpackChunkName: "misc" */ "@/services/misc").then(({ getAutoClose }) => {
+        browser.storage.local.get("popupWindowIds", ({ popupWindowIds }) => {
+            /**
+             * Make a local copy
+             */
+            let removedIds = []
+
+            if (popupWindowIds) {
+                getAutoClose()
+                    .then((autoClose) => {
+                        if (autoClose) {
+                            /**
+                             * Close any open popup windows
+                             */
+                            browser.windows.getAll({ windowTypes: ["popup"] }, (popupWindows) => {
+                                /**
+                                 * Only close existing windows
+                                 */
+                                if (popupWindows.length) {
+                                    removedIds = popupWindows.filter((popupWindow) => popupWindowIds.includes(popupWindow.id))
+                                                             .map((popupWindow) => popupWindow.id)
+                                    removedIds.forEach((id) => {
+                                        browser.windows.remove(id)
+                                    })
+                                }
+                            })
+                        }
+                    })
+            }
+
+            /**
+             * Create a new popup window
+             */
+            browser.windows.create({
+                url: "html/result.html",
+                type: "popup",
+                width: 640,
+                height: 480,
+            }, (popupWindow) => {
+                /**
+                 * Store it in local storage
+                 */
+                browser.storage.local.set({
+                    popupWindowIds: popupWindowIds ? popupWindowIds.filter((id) => !removedIds.includes(id))
+                                                                   .concat([popupWindow.id])
+                                                   : [popupWindow.id],
+                })
+            })
+        })
+    })
+}
+
 export const contextClicked = (clickData) => {
     if (clickData.menuItemId === contextMenuItem.id
         && clickData.selectionText
@@ -54,12 +107,7 @@ export const contextClicked = (clickData) => {
         console.log("[OK] QUERY: ", query)
 
         browser.storage.local.set({ query }, () => {
-            browser.windows.create({
-                url: "html/result.html",
-                type: "popup",
-                width: 640,
-                height: 480,
-            })
+            createWindow()
 
             import(/* webpackChunkName: "dictionary" */ "@/models/Dictionary").then(({ default: Dictionary }) => {
                 Dictionary.getActive()

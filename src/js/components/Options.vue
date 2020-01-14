@@ -2,9 +2,9 @@
     <div id="dict-select" class="p-4">
         <div class="flex flex-col justify-center items-center">
             <img src="/images/logo_large.png" alt="Termania.net logo" class="w-56">
-            <i class="text-sm text-gray-500">{{ $t("Dictionary Settings") }}</i>
+            <i class="text-sm text-gray-500">{{ $t("Settings") }}</i>
         </div>
-        <div class="flex justify-center items-center mt-4">
+        <div class="flex flex-col justify-center items-center mt-4">
             <label class="block w-full">
                 <span class="text-gray-700">{{ $t("Active Dictionary") }}</span>
                 <vue-single-select v-model="dictionary"
@@ -18,19 +18,33 @@
                                    @input="valueChanged"
                 />
             </label>
+            <div class="block w-full mt-4">
+                <span class="text-gray-700">{{ $t("Miscellaneous") }}</span>
+                <div class="mt-2">
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input v-model="autoClose" type="checkbox" class="form-checkbox" @change="autoCloseHandler">
+                            <span class="ml-2">
+                                {{ $t("Automatically close old result popup window on new query") }}
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import VueSingleSelect           from "vue-single-select"
-    import { isEmpty }               from "lodash-es"
-    import { getDictionaries }       from "@/services"
-    import Dictionary                from "@/models/Dictionary"
-    import { DEFAULT_DICTIONARY_ID } from "@/services/constants"
+    import VueSingleSelect                from "vue-single-select"
+    import { isEmpty }                    from "lodash-es"
+    import { getDictionaries }            from "@/services"
+    import { getAutoClose, setAutoClose } from "@/services/misc"
+    import { DEFAULT_DICTIONARY_ID }      from "@/services/constants"
+    import Dictionary                     from "@/models/Dictionary"
 
     export default {
-        name: "Dictionaries",
+        name: "Options",
 
         components: {
             VueSingleSelect,
@@ -40,6 +54,7 @@
             return {
                 dictionary: null,
                 dictionaries: [],
+                autoClose: false,
                 optionKey: "id",
                 optionLabel: "name",
             }
@@ -58,6 +73,10 @@
                                       this.$set(this, "dictionary", this.dictionaries.find((dict) => dict.id === DEFAULT_DICTIONARY_ID))
                                   })
                     })
+
+            getAutoClose().then((autoClose) => {
+                this.$set(this, "autoClose", autoClose)
+            })
         },
 
         methods: {
@@ -72,6 +91,10 @@
                 if (activeDictionary && !isEmpty(activeDictionary)) {
                     Dictionary.setActive(activeDictionary)
                 }
+            },
+
+            autoCloseHandler() {
+                setAutoClose(this.autoClose)
             },
         },
     }
