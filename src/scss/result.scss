@@ -8,6 +8,13 @@
 body {
   @apply font-body;
   font-size: 16px;
+
+  @media (prefers-color-scheme: dark) {
+    * {
+      color: #A2A2A4;
+    }
+    background-color: #2A2A2E;
+  }
 }
 
 @import "termania_xml";

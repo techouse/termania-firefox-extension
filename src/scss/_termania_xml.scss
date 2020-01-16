@@ -10,10 +10,6 @@
   @apply font-bold;
 }
 
-.color_lightdark {
-  @apply text-gray-700;
-}
-
 .font_small {
   @apply text-sm;
 }
@@ -22,6 +18,18 @@
   @apply text-lg;
 }
 
+.color_lightdark {
+  @apply text-gray-700;
+
+  @media (prefers-color-scheme: dark) {
+    @apply text-white;
+  }
+}
+
 .color_dark {
   @apply text-black;
+
+  @media (prefers-color-scheme: dark) {
+    color: #5BC0FF;
+  }
 }
