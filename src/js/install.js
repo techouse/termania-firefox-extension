@@ -33,7 +33,6 @@ const install = () => {
                 iconUrl: "images/48.png",
                 title: i18n.t("Installing Termania.net Lookup"),
                 message: i18n.t("Importing SLOLEKS 2.0 database"),
-                progress: 0,
             })
 
             import(/* webpackChunkName: "jszip" */ "jszip").then(({ default: JSZip }) => {
