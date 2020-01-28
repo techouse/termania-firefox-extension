@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Termania.net Lookup",
   "short_name": "Termania.net",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Translate Slovenian words using Termania.net",
   "author": "Klemen Tušar",
   "homepage_url": "https://github.com/techouse/termania-firefox-extension",

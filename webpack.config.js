@@ -37,7 +37,7 @@ const config = {
         path: path.resolve(__dirname, "build"),
         publicPath: "/",
         filename: "js/[name].js",
-        chunkFilename: "js/[name].[chunkhash].js"
+        chunkFilename: "js/[name].js"
     },
     optimization: {},
     resolve: {
