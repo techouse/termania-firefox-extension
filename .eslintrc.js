@@ -1,8 +1,8 @@
 module.exports = {
     parserOptions: {
-        "ecmaVersion": 2018,
-        "parser": "babel-eslint",
-        "sourceType": "module"
+        ecmaVersion: 2018,
+        parser: "babel-eslint",
+        sourceType: "module",
     },
     extends: [
         "airbnb-base",
@@ -11,35 +11,35 @@ module.exports = {
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:vue/recommended",
-        "plugin:vue-i18n/recommended",
+        "plugin:@intlify/vue-i18n/recommended",
     ],
     globals: {
-        "process": true,
-        "require": true,
-        "browser": true
+        process: true,
+        require: true,
+        chrome: true,
     },
     env: {
         browser: true,
         es6: true,
-        node: true
+        node: true,
     },
     settings: {
         "import/resolver": {
             node: {
-                extensions: [".mjs", ".js", ".json", ".vue"]
+                extensions: [".mjs", ".js", ".json", ".vue"],
             },
             alias: {
                 map: [
-                    ["@", "./src/js/"]
+                    ["@", "./src/js/"],
                 ],
-                extensions: [".ts", ".js", ".jsx", ".json", ".vue"]
+                extensions: [".ts", ".js", ".jsx", ".json", ".vue"],
             },
         },
         "import/extensions": [
             ".js",
             ".mjs",
             ".jsx",
-            ".vue"
+            ".vue",
         ],
         "import/core-modules": [],
         "import/ignore": [
@@ -47,18 +47,19 @@ module.exports = {
             "\\.(coffee|scss|css|less|hbs|svg|json)$",
         ],
         "vue-i18n": {
-            localeDir: "./src/js/i18n/*.json"
-        }
+            localeDir: "./src/js/i18n/*.{json,json5,yaml,yml}",
+            messageSyntaxVersion: "^9.0.0",
+        },
     },
     rules: {
         "no-multi-spaces": 0,
         "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0,
         "no-console": 0,
-        "camelcase": "off",
-        "indent": "off",
+        camelcase: "off",
+        indent: "off",
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "double"],
-        "semi": ["error", "never"],
+        quotes: ["error", "double"],
+        semi: ["error", "never"],
         "max-len": ["error", 120, 2, {
             ignoreUrls: true,
             ignoreComments: false,
@@ -66,8 +67,8 @@ module.exports = {
             ignoreStrings: true,
             ignoreTemplateLiterals: true,
         }],
-        "no-param-reassign": ["error", { "props": false }],
-        "no-shadow": ["error", { "allow": ["state"] }],
+        "no-param-reassign": ["error", { props: false }],
+        "no-shadow": ["error", { allow: ["state"] }],
         "object-curly-newline": "off",
         "vue/html-indent": ["error", 4],
         "vue/max-attributes-per-line": 0,
@@ -77,11 +78,11 @@ module.exports = {
             jsx: "never",
             ts: "never",
             tsx: "never",
-            vue: "never"
+            vue: "never",
         }],
         "no-new": "off",
         "no-underscore-dangle": ["error", {
-            "allow": [
+            allow: [
                 "_remove",
                 "_bulkRemove",
                 "_getData",
@@ -89,16 +90,19 @@ module.exports = {
                 "_getModel",
                 "_submit",
                 "_remove",
-                "_multiplier"
-            ]
+                "_multiplier",
+            ],
         }],
-        "vue-i18n/no-dynamic-keys": "error",
-        "vue-i18n/no-unused-keys": ["error", {
-            extensions: [".js", ".vue"]
-        }]
+        "@intlify/vue-i18n/no-dynamic-keys": "error",
+        "@intlify/vue-i18n/no-unused-keys": [
+            "error",
+            {
+                extensions: [".js", ".vue"],
+            },
+        ],
     },
     plugins: [
         "import",
-        "vue"
-    ]
+        "vue",
+    ],
 }

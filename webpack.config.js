@@ -1,19 +1,18 @@
-const path = require("path")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const CopyPlugin = require("copy-webpack-plugin")
-const TerserPlugin = require("terser-webpack-plugin")
-const { VueLoaderPlugin } = require("vue-loader")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const Fiber = require("fibers")
-const env = process.env.NODE_ENV
-const npm_config_argv = JSON.parse(process.env.npm_config_argv)
-const isWatch = npm_config_argv.remain.some(el => el.startsWith("--watch"))
-const sourceMap = env === "development"
-const production = env === "production"
-const aliases = require("./webpack.aliases")
-const PurgecssPlugin = require("purgecss-webpack-plugin")
-const glob = require("glob-all")
+const path                    = require("path"),
+      { CleanWebpackPlugin }  = require("clean-webpack-plugin"),
+      MiniCssExtractPlugin    = require("mini-css-extract-plugin"),
+      CopyPlugin              = require("copy-webpack-plugin"),
+      TerserPlugin            = require("terser-webpack-plugin"),
+      { VueLoaderPlugin }     = require("vue-loader"),
+      OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
+      Fiber                   = require("fibers"),
+      env                     = process.env.NODE_ENV,
+      isWatch                 = process.env.npm_lifecycle_event === "watch",
+      sourceMap               = env === "development",
+      production              = env === "production",
+      aliases                 = require("./webpack.aliases"),
+      PurgecssPlugin          = require("purgecss-webpack-plugin"),
+      glob                    = require("glob-all")
 
 const PATHS = {
     src: path.join(__dirname, "src")
@@ -68,7 +67,6 @@ const config = {
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
-                        options: { sourceMap }
                     },
                     {
                         loader: "css-loader",
@@ -132,15 +130,27 @@ const config = {
             patterns: [
                 {
                     from: path.resolve(__dirname, "src/html"),
-                    to: path.resolve(__dirname, "build/html")
+                    to: path.resolve(__dirname, "build/html"),
+                    globOptions: {
+                        dot: true,
+                        ignore: ["**/.DS_Store"],
+                    },
                 },
                 {
                     from: path.resolve(__dirname, "src/images"),
-                    to: path.resolve(__dirname, "build/images")
+                    to: path.resolve(__dirname, "build/images"),
+                    globOptions: {
+                        dot: true,
+                        ignore: ["**/.DS_Store"],
+                    },
                 },
                 {
                     from: path.resolve(__dirname, "src/data"),
-                    to: path.resolve(__dirname, "build/data")
+                    to: path.resolve(__dirname, "build/data"),
+                    globOptions: {
+                        dot: true,
+                        ignore: ["**/.DS_Store"],
+                    },
                 },
                 {
                     from: path.resolve(__dirname, "manifest.json"),
@@ -153,7 +163,6 @@ const config = {
             ]
         }),
         new MiniCssExtractPlugin({
-            path: path.resolve(__dirname, "build/css"),
             filename: "css/[name].css",
             chunkFilename: "css/[name].css"
         }),
