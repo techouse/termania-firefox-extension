@@ -1,18 +1,18 @@
-const path                    = require("path"),
-      { CleanWebpackPlugin }  = require("clean-webpack-plugin"),
-      MiniCssExtractPlugin    = require("mini-css-extract-plugin"),
-      CopyPlugin              = require("copy-webpack-plugin"),
-      TerserPlugin            = require("terser-webpack-plugin"),
-      { VueLoaderPlugin }     = require("vue-loader"),
-      OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
-      Fiber                   = require("fibers"),
-      env                     = process.env.NODE_ENV,
-      isWatch                 = process.env.npm_lifecycle_event === "watch",
-      sourceMap               = env === "development",
-      production              = env === "production",
-      aliases                 = require("./webpack.aliases"),
-      PurgecssPlugin          = require("purgecss-webpack-plugin"),
-      glob                    = require("glob-all")
+const path = require("path")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CopyPlugin = require("copy-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
+const { VueLoaderPlugin } = require("vue-loader")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const Fiber = require("fibers")
+const env = process.env.NODE_ENV
+const isWatch = process.env.npm_lifecycle_event === "watch"
+const sourceMap = env === "development"
+const production = env === "production"
+const aliases = require("./webpack.aliases")
+const PurgecssPlugin = require("purgecss-webpack-plugin")
+const glob = require("glob-all")
 
 const PATHS = {
     src: path.join(__dirname, "src")
@@ -45,7 +45,10 @@ const config = {
             "vue$": "vue/dist/vue.esm.js",
         },
         extensions: ["*", ".js", ".vue", ".json"],
-        modules: ["./node_modules"]
+        modules: ["./node_modules"],
+        fallback: {
+            crypto: false
+        }
     },
     stats: {
         colors: true
@@ -166,6 +169,13 @@ const config = {
             filename: "css/[name].css",
             chunkFilename: "css/[name].css"
         }),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: !isWatch })
+    ]
+}
+
+
+if (production) {
+    config.plugins.push(
         new PurgecssPlugin({
             paths: glob.sync([
                 path.join(__dirname, "src/html/*.html"),
@@ -173,18 +183,24 @@ const config = {
                 path.join(__dirname, "src/js/**/*.vue"),
                 path.join(__dirname, "node_modules/vue-single-select/dist/VueSingleSelect.vue")
             ]),
-            whitelist: ["color_orange", "font_xlarge", "strong", "color_lightdark", "font_small", "italic", "font_large", "color_dark"]
+            safelist: ["color_orange", "font_xlarge", "strong", "color_lightdark", "font_small", "italic", "font_large", "color_dark"]
         }),
-        new CleanWebpackPlugin({ cleanStaleWebpackAssets: !isWatch })
-    ]
-}
+    )
 
-
-if (production) {
+    config.optimization.minimize = true
     config.optimization.minimizer = [
-        new OptimizeCSSAssetsPlugin(),
+        new CssMinimizerPlugin({
+            parallel: true,
+            minimizerOptions: {
+                preset: [
+                    "default",
+                    {
+                        discardComments: { removeAll: true },
+                    },
+                ],
+            },
+        }),
         new TerserPlugin({
-            cache: true,
             parallel: true,
         }),
     ]
