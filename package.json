@@ -12,7 +12,7 @@
   "author": "Klemen Tušar",
   "license": "GPLv3",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "case": "^1.6.3",
     "crypto-js": "^4.0.0",
     "date-fns": "^2.15.0",
