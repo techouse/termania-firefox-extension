@@ -5,7 +5,6 @@ const CopyPlugin = require("copy-webpack-plugin")
 const TerserPlugin = require("terser-webpack-plugin")
 const { VueLoaderPlugin } = require("vue-loader")
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
-const Fiber = require("fibers")
 const env = process.env.NODE_ENV
 const isWatch = process.env.npm_lifecycle_event === "watch"
 const sourceMap = env === "development"
@@ -13,10 +12,6 @@ const production = env === "production"
 const aliases = require("./webpack.aliases")
 const PurgecssPlugin = require("purgecss-webpack-plugin")
 const glob = require("glob-all")
-
-const PATHS = {
-    src: path.join(__dirname, "src")
-}
 
 const config = {
     mode: env,
@@ -89,7 +84,6 @@ const config = {
                             sourceMap,
                             implementation: require("sass"),
                             sassOptions: {
-                                fiber: Fiber,
                                 indentWidth: 4,
                                 includePaths: [path.resolve(__dirname, "src/scss")],
                             },
