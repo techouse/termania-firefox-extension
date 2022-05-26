@@ -16,7 +16,7 @@
     "case": "^1.6.3",
     "crypto-js": "^4.0.0",
     "date-fns": "^2.15.0",
-    "dexie": "^3.0.2",
+    "dexie": "^3.2.2",
     "dexie-export-import": "^1.0.0-rc.2",
     "downloadjs": "^1.4.7",
     "jszip": "^3.7.0",
